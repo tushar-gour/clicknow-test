@@ -4,7 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-const String backend = "http://YOUR_SERVER_IP:5000";
+const String backend = "https://clicknow-test.vercel.app/";
 
 Future<void> _firebaseBackgroundHandler(RemoteMessage message) async {
   debugPrint("Background message: ${message.notification?.body}");
@@ -59,7 +59,7 @@ class _OTPPageState extends State<OTPPage> {
       fcmToken = token ?? "";
     });
 
-    print("FCM TOKEN: $token");
+    debugPrint("FCM TOKEN: $token");
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       setState(() {
