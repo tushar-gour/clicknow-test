@@ -90,12 +90,10 @@ function requireFields(...fields) {
   return (req, res, next) => {
     const missing = fields.filter((f) => !req.body[f]);
     if (missing.length > 0) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: `Missing fields: ${missing.join(", ")}`,
-        });
+      return res.status(400).json({
+        success: false,
+        message: `Missing fields: ${missing.join(", ")}`,
+      });
     }
     next();
   };
@@ -206,11 +204,6 @@ app.post("/verify-otp", requireFields("phone", "otp"), async (req, res) => {
     console.error("[verify-otp]", err.message);
     res.status(500).json({ success: false, error: err.message });
   }
-});
-
-// 404 catch-all
-app.use((req, res) => {
-  res.status(404).json({ success: false, message: "Route not found" });
 });
 
 // ─── Start ────────────────────────────────────────────────────────────────────
